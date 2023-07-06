@@ -27,14 +27,14 @@
             <members>
                 <member contactId="1"/>
                 <member contactId="2"/>
-            </members>
+            <member contactId="5"/><member contactId="4"/></members>
             <salons>
                 <salon id="1">
-                    <name/>
+                    <name>texas city</name>
                     <members>
                         <member contactId="1"/>
                         <member contactId="2"/>
-                    </members>
+                    <member contactId="5"/></members>
 
                 </salon>
             </salons>
@@ -44,8 +44,8 @@
             <members>
                 <member contactId="2"/>
                 <member contactId="3"/>
-            </members>
-        </group>
+            <member contactId="5"/></members>
+        <salons><salon id="1"><name>ambiance</name><members><member contactId="3"/><member contactId="5"/></members></salon></salons></group>
     <group id="3"><name>Projet XML</name><members><member contactId="4"/><member contactId="5"/></members></group></groups>
     <messages>
         <message id="1" sender="1" recipient="2" timestamp="2023-06-27T10:15:00">

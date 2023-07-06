@@ -70,6 +70,7 @@ function getGroupName($groups, $groupId)
             <th>ID</th>
             <th>Nom</th>
             <th>Membres</th>
+            <th colspan="3">Salons</th>
             <th>Actions</th>
         </tr>
         <?php foreach ($messagerie->groups->group as $group) : ?>
@@ -81,8 +82,32 @@ function getGroupName($groups, $groupId)
                         <li><?php echo $messagerie->contacts->contact[intval($member['contactId'])]->name; ?><br></li>
                     <?php endforeach; ?>
                 </td>
+                <td colspan="3">
+                    <?php if ($group->salons->count() > 0) : ?>
+                        <?php foreach ($group->salons->salon as $salon) : ?>
+                            <div>
+                                <strong>Nom du salon:</strong> <?php echo $salon->name; ?><br>
+                                <strong>Membres du salon:</strong>
+                                <li>
+                                    <?php foreach ($salon->members->member as $salonMember) : ?>
+                                        <?php echo $messagerie->contacts->contact[intval($salonMember['contactId'])]->name; ?><br>
+                                    <?php endforeach; ?>
+                                </li>
+                                <a href="ajouter_membre_salon.php?group_id=<?php echo $group['id']; ?>&salon_id=<?php echo $salon['id']; ?>">Ajouter Membre Salon</a>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        Aucun salon disponible.
+                    <?php endif; ?>
+                </td>
                 <td>
                     <a href="modifier_groupe.php?id=<?php echo $group['id']; ?>">Modifier</a>
+                </td>
+                <td>
+                    <a href="ajouter_membre.php?group_id=<?php echo $group['id']; ?>&salon_id=<?php echo $salon['id']; ?>">Ajouter Membre Groupe</a>
+                </td>
+                <td>
+                    <a href="ajouter_salon.php?group_id=<?php echo $group['id']; ?>">Ajouter Salon</a>
                 </td>
             </tr>
         <?php endforeach; ?>
