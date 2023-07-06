@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <!-- Definition des elements simple-->
+    <xsd:element name="name" type="xsd:string"/>
+    <xsd:element name="telephone" type="xsd:int"/>
+    <xsd:element name="question" type="xsd:string"/>
+    <xsd:element name="text" type="xsd:string"/>
+    <xsd:element name="file" type="xsd:string"/>
+    <xsd:element name="localisation" type="xsd:string"/>
+    <xsd:element name="contacte" type="xsd:string"/>
+    <xsd:element name="link" type="xsd:string"/>
+    <xsd:element name="audio" type="xsd:string"/>
+
+
+
+    <!-- Definition de l'element contact-->
+    <xsd:element name="contact">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="name"/>
+                <xsd:element ref="telephone"/>
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:string" use="required"/>
+        </xsd:complexType>
+        <xsd:key name="PK_idContact">
+            <xsd:selector xpath="contact"/>
+            <xsd:field xpath="id"/>
+        </xsd:key>
+    </xsd:element>
+
+    <!-- Definitions de contacts-->
+    <xsd:element name="contacts">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="contact" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- Definition member-->
+    <xsd:element name="member">
+        <xsd:complexType>
+            <xsd:attribute name="contactId" type="xsd:string" use="required"/>
+        </xsd:complexType>
+        <xsd:key name="PK_ID_groupContact">
+            <xsd:selector xpath="member"/>
+            <xsd:field xpath="contactId"/>
+        </xsd:key>
+        <xsd:keyref name="FK_groupXContact" refer="PK_idContact">
+            <xsd:selector xpath="contact"/>
+            <xsd:field xpath="contactId"/>
+        </xsd:keyref>
+    </xsd:element>
+
+    <!-- Definition members-->
+    <xsd:element name="members">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="member" minOccurs="2" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- Definition salon-->
+    <xsd:element name="salon">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="name"/>
+                <xsd:element ref="members"/>
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:string" use="required"/>
+        </xsd:complexType>
+        <xsd:key name="PK_idSalon">
+            <xsd:selector xpath="salon"/>
+            <xsd:field xpath="id"/>
+        </xsd:key>
+    </xsd:element>
+
+    <!-- Definition de salons-->
+    <xsd:element name="salons">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="salon" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- Definition de group-->
+    <xsd:element name="group">
+        <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="name"/>
+            <xsd:element ref="members"/>
+            <xsd:element ref="salons" minOccurs="0"/>
+         </xsd:sequence>
+         <xsd:attribute name="id" type="xsd:string" use="required"/>
+        </xsd:complexType>
+        <xsd:key name="PK_group">
+         <xsd:selector xpath="group"/>
+         <xsd:field xpath="id"/>
+        </xsd:key>
+    </xsd:element>
+
+    <!-- Definition de groups-->
+    <xsd:element name="groups">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="group" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- Definition de reponses -->
+    <xsd:element name="reponses">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="choix" minOccurs="2" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- Definition de choix -->
+    <xsd:element name="choix">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- Definition de sondage -->
+    <xsd:element name="sondage">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="question"/>
+                <xsd:element ref="reponses"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+
+    <!-- Type de content-->
+    <xsd:simpleType name="ContentType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="text"/>
+            <xsd:enumeration value="file"/>
+            <xsd:enumeration value="localisation"/>
+            <xsd:enumeration value="contact"/>
+            <xsd:enumeration value="sondage"/>
+            <xsd:enumeration value="link"/>
+            <xsd:enumeration value="audio"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <!-- Groupe attribut pour supplementaire-->
+    <xsd:attributeGroup name="contactAttrib">
+        <xsd:attribute name="contactId" type="xsd:string" use="optional"/>
+        <xsd:attribute name="latitude" type="xsd:string" use="optional"/>
+        <xsd:attribute name="longitude" type="xsd:string" use="optional"/>
+    </xsd:attributeGroup>
+
+    <!-- Definition de content-->
+    <xsd:element name="content">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="text" />
+                <xsd:element ref="file" minOccurs="0"/>
+                <xsd:element ref="localisation" minOccurs="0"/>
+                <xsd:element ref="contacte" minOccurs="0"/>
+                <xsd:element ref="sondage" minOccurs="0"/>
+                <xsd:element ref="link" minOccurs="0"/>
+                <xsd:element ref="audio" minOccurs="0"/>
+            </xsd:sequence>
+            <xsd:attribute name="type" type="ContentType" />
+            <xsd:attributeGroup ref="contactAttrib"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- Definition de quote-->
+    <xsd:element name="quote">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                    <xsd:attribute name="messageId" type="xsd:string" use="required"/>
+                    <xsd:attribute name="sender"/>
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:keyref name="FK_SenderQuote" refer="PK_idContact">
+            <xsd:selector xpath="quote"/>
+            <xsd:field xpath="sender"/>
+        </xsd:keyref>
+        <xsd:keyref name="FK_MessageCite" refer="PK_message">
+            <xsd:selector xpath="quote"/>
+            <xsd:field xpath="messageId"/>
+        </xsd:keyref>
+    </xsd:element>
+
+    <!-- Definition de message-->
+    <xsd:element name="message">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="content"/>
+                <xsd:element ref="quote" minOccurs="0"/>
+            </xsd:sequence>
+            <xsd:attribute name="sender" type="xsd:string" use="required"/>
+            <xsd:attribute name="recipient" type="xsd:string" use="optional"/>
+            <xsd:attribute name="timestamp" type="xsd:string" use="required"/>
+            <xsd:attribute name="group" type="xsd:string" use="optional"/>
+            <xsd:attribute name="salon" type="xsd:string" use="optional"/>
+            <xsd:attribute name="id" type="xsd:string" use="required"/>
+
+        </xsd:complexType>
+        <xsd:keyref name="FK_sender" refer="PK_idContact">
+            <xsd:selector xpath="message"/>
+            <xsd:field xpath="sender"/>
+        </xsd:keyref>
+        <xsd:keyref name="FK_recipient" refer="PK_idContact">
+            <xsd:selector xpath="message"/>
+            <xsd:field xpath="recipient"/>
+        </xsd:keyref>
+        <xsd:keyref name="FK_groupMessage" refer="PK_group">
+            <xsd:selector xpath="message"/>
+            <xsd:field xpath="group"/>
+        </xsd:keyref>
+        <xsd:keyref name="FK_salonMessage" refer="PK_idSalon">
+            <xsd:selector xpath="message"/>
+            <xsd:field xpath="salon"/>
+        </xsd:keyref>
+        <xsd:key name="PK_message">
+            <xsd:selector xpath="message"/>
+            <xsd:field xpath="id"/>
+        </xsd:key>
+    </xsd:element>
+
+    <!-- Definition de messages-->
+    <xsd:element name="messages">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="message" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- Definition de l'element messagerie-->
+    <xsd:element name="messagerie">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="contacts"/>
+                <xsd:element ref="groups"/>
+                <xsd:element ref="messages"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

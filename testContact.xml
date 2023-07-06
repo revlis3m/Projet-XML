@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<messagerie xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./silverprop1.xsd">
+    <contacts>
+        <contact id="1">
+            <name>Johny</name>
+            <telephone>788888888</telephone>
+        </contact>
+        <contact id="2">
+            <name>Alice</name>
+            <telephone>788888888</telephone>
+
+        </contact>
+        <contact id="3">
+            <name>Bob</name>
+            <telephone>788888888</telephone>
+        </contact>
+
+        <contact id="4">
+            <name>Babi</name>
+            <telephone>788888888</telephone>
+        </contact>
+    <contact id="5"><name>Silver</name><telephone>781615371</telephone></contact><contact id="6"><name>Felix</name><telephone>21213131</telephone></contact></contacts>
+    
+    <groups>
+        <group id="1">
+            <name>Family love</name>
+            <members>
+                <member contactId="1"/>
+                <member contactId="2"/>
+            </members>
+            <salons>
+                <salon id="1">
+                    <name/>
+                    <members>
+                        <member contactId="1"/>
+                        <member contactId="2"/>
+                    </members>
+
+                </salon>
+            </salons>
+        </group>
+        <group id="2">
+            <name>Work</name>
+            <members>
+                <member contactId="2"/>
+                <member contactId="3"/>
+            </members>
+        </group>
+    <group id="3"><name>Projet XML</name><members><member contactId="4"/><member contactId="5"/></members></group></groups>
+    <messages>
+        <message id="1" sender="1" recipient="2" timestamp="2023-06-27T10:15:00">
+            <content type="text">
+                <text>Alice! How are you?</text>
+            </content>
+        </message>
+
+        <message id="2" sender="2" group="1" timestamp="2023-06-27T11:30:00">
+            <content type="text">
+                <text>I'm good</text>
+            </content>
+        </message>
+
+        <message id="3" sender="2" recipient="1" timestamp="2023-06-27T11:30:00">
+            <content type="sondage">
+                <text>my name</text>
+                <sondage>
+                    <question>
+            what's your name?
+                    </question>
+                    <reponses>
+                        <choix>aly</choix>
+                        <choix>baba</choix>
+                    </reponses>
+                </sondage>
+
+            </content>
+        </message>
+
+        <message id="4" sender="3" recipient="1" timestamp="2023-06-27T12:45:00">
+            <content type="audio">
+                <text>Maitre Gims- finito</text>
+                <audio>audio_message.mp3</audio>
+            </content>
+        </message>
+
+        <message id="5" sender="1" group="2" timestamp="2023-06-27T14:00:00">
+            <content type="file">
+                <text>cours XML chap 1</text>
+                <file>cOurschap1.pdf</file>
+            </content>
+            <quote messageId="2" sender="2">I agree with Alice. Let's proceed.</quote>
+        </message>
+        <message id="6" sender="1" group="2" timestamp="2023-06-27T14:00:00">
+            <content type="link">
+                <text>Facebook reseaux sociaux</text>
+                <link>www.facebook.com</link>
+            </content>
+            <quote messageId="2" sender="2">site de test</quote>
+        </message>
+
+        <message id="7" sender="3" recipient="1,2" timestamp="2023-06-27T10:35:00">
+            <content type="text">
+                <text>Hey John and Alice, I have an exciting news to share!</text>
+            </content>
+        </message>
+        <message id="8" sender="3" recipient="1,2" timestamp="2023-06-27T10:35:00">
+            <content type="localisation" latitude="1,1" longitude="2,2">
+                <text>j'habite ici</text>
+                <localisation>ici</localisation>
+            </content>
+        </message>
+
+        <message id="9" sender="3" recipient="1,2" timestamp="2023-06-27T10:35:00">
+            <content type="contact">
+                <text>Felix</text>
+                <contacte>Felix Ndao</contacte>
+            </content>
+        </message>
+    <message id="10" sender="1" group="2" timestamp="2023-07-06T01:16:31"><content type="text"><text>Bonjour vous savez ce qu'il faut faire ?</text></content></message><message id="11" sender="4" recipient="5" timestamp="2023-07-06T01:17:17"><content type="audio"><text>voila</text><audio>Blalbla.mp3</audio></content></message><message id="12" sender="5" recipient="6" timestamp="2023-07-06T01:17:59"><content type="file"><text>w</text><file>1</file></content></message></messages>
+</messagerie>
